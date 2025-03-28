@@ -1,10 +1,5 @@
-// components/DocumentSearch.jsx
 'use client'
 import { useState } from 'react'
-import { supabase } from '../lib/supabase'
-import OpenAI from "openai";
-
-const openai = new OpenAI({apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
 
 export default function DocumentSearch() {
   const [query, setQuery] = useState('')
@@ -16,26 +11,22 @@ export default function DocumentSearch() {
     if (!query) return
 
     setLoading(true)
+
     try {
-      // Generate embedding for the search query
-      const embeddingResponse = await openai.embeddings.create({
-        model: "text-embedding-ada-002",
-        input: query,
-      });
-      const [{ embedding }] = embeddingResponse.data.data
+      const response = await fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      })
 
-      // Search for similar documents using the custom function
-      const { data, error } = await supabase
-        .rpc('match_documents', {
-          query_embedding: embedding,
-          match_threshold: 0.7,
-          match_count: 5
-        })
+      const data = await response.json()
 
-      if (error) throw error
-      setResults(data || [])
+      if (!response.ok) throw new Error(data.error || 'Failed to search')
+
+      setResults(data.results || [])
     } catch (error) {
-      alert('Error searching documents: ' + error.message)
+      console.error('Error:', error)
+      alert(`Error searching documents: ${error.message}`)
     } finally {
       setLoading(false)
     }
