@@ -22,13 +22,12 @@ export async function POST(req) {
 
     // Call the Supabase RPC function
     const { data, error } = await supabase
-    .rpc('match_documents', {
-      query_embedding: JSON.stringify(embedding),  // Ensure it's passed as JSON
+    .rpc('match_documents_jsonb', {
+      query_embedding: JSON.stringify(embedding),  // Use the new function name
       match_threshold: 0.7,
       match_count: 5
-    }, {
-      head: true,  // Force Supabase to pick the correct function
     });
+  
   
 
     if (error) {
