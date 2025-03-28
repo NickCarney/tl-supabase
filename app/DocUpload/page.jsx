@@ -20,7 +20,7 @@ export default function DocumentUpload() {
       // Generate embedding with OpenAI
       const embeddingResponse = await openai.embeddings.create({
         model: "text-embedding-ada-002",
-        input: query,
+        input: content,
       });
       const [{ embedding }] = embeddingResponse.data.data
 
