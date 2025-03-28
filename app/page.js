@@ -2,36 +2,29 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  const { push } = useRouter();
+  const {push} = useRouter();
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchSession = async () => {
-      const { data: { session }, error } = await supabase.auth.getSession()
-  
-      if (error) {
-        console.error('Error fetching session:', error)
-      }
-  
+    // Check for active session
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
       setLoading(false)
-    }
-  
-    fetchSession()
-  
+    })
+
+    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session)
       }
     )
-  
+
     return () => subscription.unsubscribe()
   }, [])
-  
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -54,11 +47,11 @@ export default function Home() {
           </header>
 
           <main>
-            <button onClick={() => push('/DocUpload')} className='bg-blue-500 text-white p-2 rounded'>
+          <button onClick={() => push('/DocUpload')} className='bg-blue-500 text-white p-2 rounded'>
               Upload Document
             </button>
             <hr />
-            <button onClick={() => push('/DocSearch')} className='bg-blue-500 text-white p-2 rounded'>
+            <button onClick={() => push('/search')} className='bg-blue-500 text-white p-2 rounded'>
               Upload Document
             </button>
           </main>
