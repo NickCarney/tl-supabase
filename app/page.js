@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase } from './lib/supabase'
 import Auth from './Auth'
-import DocumentUpload from './DocumentUpload'
-import DocumentSearch from './DocumentSearch'
+import DocumentUpload from './components/DocumentUpload'
+import DocumentSearch from './components/DocumentSearch'
 
 export default function Home() {
   const [session, setSession] = useState(null)
