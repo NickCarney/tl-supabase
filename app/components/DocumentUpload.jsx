@@ -1,12 +1,9 @@
 // components/DocumentUpload.jsx
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Configuration, OpenAIApi } from 'openai'
+import OpenAI from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(configuration)
+const openai = new OpenAI( {apiKey: process.env.OPENAI_API_KEY } );
 
 export default function DocumentUpload() {
   const [title, setTitle] = useState('')
@@ -20,10 +17,10 @@ export default function DocumentUpload() {
     setLoading(true)
     try {
       // Generate embedding with OpenAI
-      const embeddingResponse = await openai.createEmbedding({
+      const embeddingResponse = await openai.embeddings.create({
         model: "text-embedding-ada-002",
-        input: content,
-      })
+        input: query,
+      });
       const [{ embedding }] = embeddingResponse.data.data
 
       // Store document with embedding
