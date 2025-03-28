@@ -10,21 +10,28 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check for active session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const fetchSession = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession()
+  
+      if (error) {
+        console.error('Error fetching session:', error)
+      }
+  
       setSession(session)
       setLoading(false)
-    })
-
-    // Listen for auth changes
+    }
+  
+    fetchSession()
+  
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session)
       }
     )
-
+  
     return () => subscription.unsubscribe()
   }, [])
+  
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
