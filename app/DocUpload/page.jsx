@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 export default function DocumentUpload() {
-  const userId = searchParams.get('user_id');
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
