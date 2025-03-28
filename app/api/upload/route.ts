@@ -34,9 +34,9 @@ export async function POST(req) {
       .from('documents')
       .insert({
         title,
-        user_id: session.user.id,  // Use the user_id from the authenticated session
+        user_id: session.user.id, 
         content,
-        embedding: JSON.stringify(embedding)  // Store as string or jsonb
+        embedding: JSON.stringify(embedding)  
       });
 
     if (error) {
