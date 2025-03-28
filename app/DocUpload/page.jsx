@@ -1,10 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { useSearchParams } from "next/navigation";
 
 export default function DocumentUpload() {
   const searchParams = useSearchParams();
-  const session_id = searchParams.get("id");
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
