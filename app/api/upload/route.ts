@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { supabase } from'../../lib/supabase';
+import { supabase } from '../../lib/supabase';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req) {
   try {
+    // Get the authenticated user's session from the headers
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    // If there's no session or user is not authenticated, return an error
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'User is not authenticated' }, { status: 401 });
+    }
+
     const { title, content } = await req.json();
 
     if (!title || !content) {
@@ -19,14 +27,14 @@ export async function POST(req) {
     });
 
     const embedding = embeddingResponse.data[0].embedding;
-    console.log(embedding)
+    console.log(embedding);
 
     // Store document with embedding in Supabase
     const { error } = await supabase
       .from('documents')
       .insert({
         title,
-        user_id:"f6e574cc-4079-49aa-91eb-6a1bec85d900",
+        user_id: session.user.id,  // Use the user_id from the authenticated session
         content,
         embedding: JSON.stringify(embedding)  // Store as string or jsonb
       });
