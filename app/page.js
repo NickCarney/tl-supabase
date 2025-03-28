@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
-import Auth from './Auth'
+import Auth from './components/Auth'
 import DocumentUpload from './components/DocumentUpload'
 import DocumentSearch from './components/DocumentSearch'
 
