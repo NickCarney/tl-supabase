@@ -47,7 +47,7 @@ export default function Home() {
           </header>
 
           <main>
-          <button onClick={() => push(`/DocUpload`)} className='bg-blue-500 text-white p-2 rounded'>
+          <button onClick={() => push(`/DocUpload?user_id=${session.user.id}`)} className='bg-blue-500 text-white p-2 rounded'>
               Upload Document
             </button>
             <hr />
