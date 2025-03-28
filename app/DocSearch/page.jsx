@@ -1,4 +1,5 @@
 // components/DocumentSearch.jsx
+'use client'
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import OpenAI from "openai";
