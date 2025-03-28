@@ -51,8 +51,8 @@ export default function Home() {
               Upload Document
             </button>
             <hr />
-            <button onClick={() => push('/search')} className='bg-blue-500 text-white p-2 rounded'>
-              Upload Document
+            <button onClick={() => push('/DocSearch')} className='bg-blue-500 text-white p-2 rounded'>
+              Search Document
             </button>
           </main>
         </div>

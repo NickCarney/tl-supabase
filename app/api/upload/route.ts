@@ -19,12 +19,14 @@ export async function POST(req) {
     });
 
     const embedding = embeddingResponse.data[0].embedding;
+    console.log(embedding)
 
     // Store document with embedding in Supabase
     const { error } = await supabase
       .from('documents')
       .insert({
         title,
+        user_id:"f6e574cc-4079-49aa-91eb-6a1bec85d900",
         content,
         embedding: JSON.stringify(embedding)  // Store as string or jsonb
       });
