@@ -1,7 +1,10 @@
 'use client'
 import { useState } from 'react'
+import { useSearchParams } from "next/navigation";
 
 export default function DocumentUpload() {
+  const searchParams = useSearchParams();
+  const session_id = searchParams.get("id");
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
@@ -16,7 +19,7 @@ export default function DocumentUpload() {
       const response = await fetch('/api/upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content })
+        body: JSON.stringify({ title, content, session_id })
       })
 
       const data = await response.json()

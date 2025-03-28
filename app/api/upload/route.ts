@@ -6,15 +6,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req) {
   try {
-    // Get the authenticated user's session from the headers
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    // If there's no session or user is not authenticated, return an error
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'User is not authenticated' }, { status: 401 });
-    }
-
-    const { title, content } = await req.json();
+    const { title, content, session_id } = await req.json();
 
     if (!title || !content) {
       return NextResponse.json({ error: 'Missing title or content' }, { status: 400 });
@@ -34,7 +26,7 @@ export async function POST(req) {
       .from('documents')
       .insert({
         title,
-        user_id: session.user.id, 
+        user_id: session_id, 
         content,
         embedding: JSON.stringify(embedding)  
       });
