@@ -1,9 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 
 export default function DocumentUpload() {
-  const searchParams = useSearchParams();
   const userId = searchParams.get('user_id');
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -14,6 +12,13 @@ export default function DocumentUpload() {
     if (!title || !content) return alert('Please fill in all fields')
 
     setLoading(true)
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+          const params = new URLSearchParams(window.location.search);
+          setUserId(params.get('user_id'));
+        }
+      }, []);
 
     try {
       const response = await fetch('/api/upload', {
