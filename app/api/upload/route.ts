@@ -6,7 +6,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req) {
   try {
-    const { title, content, session_id } = await req.json();
+    const { title, content } = await req.json();
 
     if (!title || !content) {
       return NextResponse.json({ error: 'Missing title or content' }, { status: 400 });
@@ -26,7 +26,7 @@ export async function POST(req) {
       .from('documents')
       .insert({
         title,
-        user_id: session_id, 
+        user_id: 'f6e574cc-4079-49aa-91eb-6a1bec85d900', 
         content,
         embedding: JSON.stringify(embedding)  
       });
