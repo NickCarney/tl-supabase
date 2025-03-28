@@ -35,19 +35,22 @@ export default function Auth() {
       <h1>Supabase Auth + Vector DB Demo</h1>
       <form>
         <input
+        className='outline'
           type="email"
           placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className='outline'
           type="password"
           placeholder="Your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleSignUp} disabled={loading}>
-          Sign Up
+        <br/>
+        <button onClick={handleSignUp} disabled={loading} className='pr-5'>
+          Sign Up 
         </button>
         <button onClick={handleSignIn} disabled={loading}>
           Sign In
