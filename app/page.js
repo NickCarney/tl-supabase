@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth'
-import DocumentUpload from './components/DocumentUpload'
-import DocumentSearch from './components/DocumentSearch'
+import {useRouter} from 'next/navigation'
 
 export default function Home() {
+  const { push } = useRouter();
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -54,9 +54,13 @@ export default function Home() {
           </header>
 
           <main>
-            <DocumentUpload />
+            <button onClick={() => push('/DocUpload')} className='bg-blue-500 text-white p-2 rounded'>
+              Upload Document
+            </button>
             <hr />
-            <DocumentSearch />
+            <button onClick={() => push('/DocSearch')} className='bg-blue-500 text-white p-2 rounded'>
+              Upload Document
+            </button>
           </main>
         </div>
       )}
