@@ -1,0 +1,1 @@
+this is a test app to show vercel + supabase with auth and vectorized data storage
