@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     if (error) throw error;
 
     return NextResponse.json({ message: 'Embedding stored successfully!' });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

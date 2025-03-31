@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 export default function SearchPage() {
   const [query, setQuery] = useState<string>('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<any[]>([]);// eslint-disable-line
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 

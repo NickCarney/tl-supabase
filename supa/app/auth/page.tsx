@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AuthPage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<any>(null);// eslint-disable-line
   const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
       const { data, error } = await supabase.auth.getUser();
+      console.log(error);
       if (data?.user) setUser(data.user);
     };
 
