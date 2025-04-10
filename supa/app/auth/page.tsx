@@ -32,7 +32,7 @@ export default function AuthPage() {
   const signOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    router.push('/');
+    router.push('/auth');
   };
 
   return (
