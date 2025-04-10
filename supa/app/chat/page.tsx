@@ -26,6 +26,9 @@ export default function Chat() {
           onChange={handleInputChange}
         />
       </form>
+      <a href="/" className="text-sm text-black text-center">
+        Back
+      </a>
     </div>
   );
 }
