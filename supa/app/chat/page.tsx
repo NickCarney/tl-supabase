@@ -2,6 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Chat() {
   const [model, setModel] = useState("gpt-3.5-turbo");
@@ -57,9 +58,9 @@ export default function Chat() {
         />
       </form>
 
-      <a href="/" className="text-sm text-black text-center">
+      <Link href="/" className="text-sm text-black text-center">
         Back
-      </a>
+      </Link>
     </div>
   );
 }
