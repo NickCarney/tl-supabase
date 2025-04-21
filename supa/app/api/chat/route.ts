@@ -5,10 +5,10 @@ import { z } from "zod";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, model } = await req.json();
 
   const result = streamText({
-    model: openai("gpt-4o"),
+    model: openai(model),
     messages,
     tools: {
       weather: tool({

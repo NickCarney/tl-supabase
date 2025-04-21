@@ -22,9 +22,9 @@ export default function Chat() {
           onChange={(e) => setModel(e.target.value)}
           className="p-2 border border-zinc-300 rounded"
         >
-          <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-          <option value="gpt-4">GPT-4</option>
-          <option value="gpt-4-turbo">GPT-4 Turbo</option>
+          <option value="gpt-3.5-turbo-instruct">GPT-3.5 Turbo</option>
+          <option value="gpt-4o">GPT-4o</option>
+          <option value="gpt-4-turbo-instruct">GPT-4 Turbo</option>
         </select>
       </div>
 
@@ -33,10 +33,16 @@ export default function Chat() {
         <div key={message.id} className="whitespace-pre-wrap">
           {message.role === "user" ? "User: " : "AI: "}
           {message.parts.map((part, i) => {
-            if (part.type === "text") {
-              return <div key={`${message.id}-${i}`}>{part.text}</div>;
+            switch (part.type) {
+              case "text":
+                return <div key={`${message.id}-${i}`}>{part.text}</div>;
+              case "tool-invocation":
+                return (
+                  <pre key={`${message.id}-${i}`}>
+                    {JSON.stringify(part.toolInvocation, null, 2)}
+                  </pre>
+                );
             }
-            return null;
           })}
         </div>
       ))}
