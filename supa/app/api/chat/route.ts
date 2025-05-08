@@ -11,13 +11,39 @@ export async function POST(req: Request) {
     model: openai(model),
     messages,
     tools: {
-      weather: tool({
+      weather_f: tool({
         description: "Get the weather in a location (fahrenheit)",
         parameters: z.object({
           location: z.string().describe("The location to get the weather for"),
         }),
         execute: async ({ location }) => {
           const temperature = Math.round(Math.random() * (90 - 32) + 32);
+          return {
+            location,
+            temperature,
+          };
+        },
+      }),
+      weather_c: tool({
+        description: "Get the weather in a location (celsius)",
+        parameters: z.object({
+          location: z.string().describe("The location to get the weather for"),
+        }),
+        execute: async ({ location }) => {
+          const temperature = Math.round(Math.random() * (90 - 32));
+          return {
+            location,
+            temperature,
+          };
+        },
+      }),
+      weather_k: tool({
+        description: "Get the weather in a location (fahrenheit)",
+        parameters: z.object({
+          location: z.string().describe("The location to get the weather for"),
+        }),
+        execute: async ({ location }) => {
+          const temperature = Math.round(Math.random() * (90 - 32) + 273);
           return {
             location,
             temperature,
