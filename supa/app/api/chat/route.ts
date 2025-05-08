@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         },
       }),
       weather_k: tool({
-        description: "Get the weather in a location (fahrenheit)",
+        description: "Get the weather in a location (kelvin)",
         parameters: z.object({
           location: z.string().describe("The location to get the weather for"),
         }),
