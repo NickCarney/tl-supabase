@@ -50,6 +50,59 @@ export async function POST(req: Request) {
           };
         },
       }),
+      send: tool({
+        description: "Invoke the send/route.ts endpoint to send a message",
+        parameters: z.object({
+          message: z.string().describe("The message to send"),
+        }),
+        execute: async ({ message }) => {
+          const response = await fetch("http://localhost:3000/api/send", {
+            // Ensure the correct URL
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }),
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(
+              `Failed to send email: ${error.error || "Unknown error"}`
+            );
+          }
+
+          const result = await response.json();
+          return result;
+        },
+      }),
+      checkoutSession: tool({
+        description: "Create a checkout session for a product",
+        parameters: z.object({
+          amount: z.number().describe("The amount for the checkout session"),
+          currency: z
+            .string()
+            .describe("The currency for the checkout session"),
+        }),
+        execute: async ({ amount, currency }) => {
+          const response = await fetch(
+            "http://localhost:3000/api/checkout_sessions",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ amount, currency }),
+            }
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(
+              `Failed to create checkout session: ${error.error || "Unknown error"}`
+            );
+          }
+
+          const result = await response.json();
+          return result;
+        },
+      }),
     },
   });
 
