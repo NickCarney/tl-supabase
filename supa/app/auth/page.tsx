@@ -22,7 +22,7 @@ export default function AuthPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `https://tl-supabase.vercel.app/auth/callback`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
       },
     });
 
@@ -36,7 +36,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="p-8">
+    <main className="text-center px-4 py-8">
       <h1 className="text-2xl font-bold">Google Auth with Supabase</h1>
 
       {user ? (
@@ -51,6 +51,6 @@ export default function AuthPage() {
           Sign In with Google
         </button>
       )}
-    </div>
+    </main>
   );
 }
