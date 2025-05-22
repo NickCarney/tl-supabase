@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,17 +30,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="text-center py-4">
-          <a href="/" className="font-bold text-blue-400 hover:text-purple-400">Devjock Test</a>
+          <Link href="/" className="font-bold text-blue-400 hover:text-purple-400">Devjock Test</Link>
         </header>
 
         {children}
 
         <footer>
           <div className="text-center">
-            <p><a href="/auth" className="text-blue-400 hover:text-purple-400">Authenticate</a></p>
-            <p><a href="/queries/add" className="text-blue-400 hover:text-purple-400">Add Query</a></p>
-            <p><a href="/search" className="text-blue-400 hover:text-purple-400">Search Queries</a></p>
-            <p><a href="/chat" className="text-blue-400 hover:text-purple-400">Chat with AI SDK</a></p>
+            <p><Link href="/auth" className="text-blue-400 hover:text-purple-400">Authenticate</Link></p>
+            <p><Link href="/queries/add" className="text-blue-400 hover:text-purple-400">Add Query</Link></p>
+            <p><Link href="/search" className="text-blue-400 hover:text-purple-400">Search Queries</Link></p>
+            <p><Link href="/chat" className="text-blue-400 hover:text-purple-400">Chat with AI SDK</Link></p>
           </div>
         </footer>
         <Analytics />
