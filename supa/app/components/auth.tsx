@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { supabase } from '@/lib/supabaseClient';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
-  const [user, setUser] = useState<any>(null);// eslint-disable-line
+  const [user, setUser] = useState<any>(null); // eslint-disable-line
   const router = useRouter();
 
   useEffect(() => {
@@ -20,19 +20,19 @@ export default function AuthPage() {
 
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: "google",
       options: {
         redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
       },
     });
 
-    if (error) console.error('Error:', error);
+    if (error) console.error("Error:", error);
   };
 
   const signOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    router.push('/auth');
+    router.push("/auth");
   };
 
   return (
@@ -42,12 +42,18 @@ export default function AuthPage() {
       {user ? (
         <div>
           <p>Welcome, {user.email}</p>
-          <button onClick={signOut} className="mt-4 px-4 py-2 bg-red-500 text-white">
+          <button
+            onClick={signOut}
+            className="mt-4 px-4 py-2 bg-red-500 text-white"
+          >
             Sign Out
           </button>
         </div>
       ) : (
-        <button onClick={signInWithGoogle} className="mt-4 px-4 py-2 bg-blue-500 text-white">
+        <button
+          onClick={signInWithGoogle}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white"
+        >
           Sign In with Google
         </button>
       )}

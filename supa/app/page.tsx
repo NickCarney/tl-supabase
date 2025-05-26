@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import AuthPage from "./components/auth";
+import Chat from "./components/chat";
 
 export default function HomePage() {
   const [userId, setUserId] = useState<string | null>(null);
@@ -22,7 +24,13 @@ export default function HomePage() {
   return (
     <main className="text-center p-8">
       <h1 className="text-lg font-bold">Welcome to Devjock Test!</h1>
-      {userId && <p className="text-sm text-gray-500">User ID: {userId}</p>}
+      <AuthPage />
+      {userId && (
+        <div>
+          <p className="text-sm text-gray-500">User ID: {userId}</p>
+          <Chat />
+        </div>
+      )}
     </main>
   );
 }
