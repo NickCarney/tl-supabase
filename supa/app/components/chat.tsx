@@ -92,9 +92,7 @@ export default function Chat() {
             value={input}
             placeholder="Say something..."
             onChange={handleInputChange}
-            onSubmit={() => {
-              saveToSupabase;
-            }}
+            onSubmit={saveToSupabase}
           />
         </form>
 
