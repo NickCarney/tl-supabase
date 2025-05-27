@@ -43,6 +43,7 @@ export default function Chat() {
       body: {
         model,
       },
+      api: "/api/chat",
     });
 
   return (
@@ -101,7 +102,7 @@ export default function Chat() {
         {error && (
           <div className="text-red-500">
             <strong>Error:</strong>
-            <pre>{error.message}</pre>
+            <pre>{JSON.stringify(error, null, 2)}</pre>
           </div>
         )}
       </div>
