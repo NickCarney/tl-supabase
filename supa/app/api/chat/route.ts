@@ -1,4 +1,4 @@
-import { anthropic } from '@ai-sdk/anthropic';
+import { anthropic } from "@ai-sdk/anthropic";
 import { openai } from "@ai-sdk/openai";
 import { streamText, tool } from "ai";
 import { z } from "zod";
@@ -10,9 +10,9 @@ export async function POST(req: Request) {
 
   // Decide provider based on model name
   let providerModel;
-  if (model.startsWith('claude-')) {
+  if (model.startsWith("claude-")) {
     providerModel = anthropic(model);
-  } else if (model.startsWith('gpt-')) {
+  } else if (model.startsWith("gpt-")) {
     providerModel = openai(model);
   } else {
     // return error if model is not supported
@@ -127,6 +127,7 @@ export async function POST(req: Request) {
       }),
     },
   });
+  console.log("Result:", result);
 
   return result.toDataStreamResponse();
 }
