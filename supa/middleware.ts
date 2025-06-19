@@ -1,10 +1,9 @@
-
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { auth0 } from "./lib/auth0";
 
 export async function middleware(request: NextRequest) {
-  const session = await auth0.getSession(request);  
+  const session = await auth0.getSession(request);
   if (request.nextUrl.pathname.startsWith("/auth")) {
     return await auth0.middleware(request);
   }
@@ -14,10 +13,6 @@ export async function middleware(request: NextRequest) {
   }
   return await auth0.middleware(request);
 }
-
-
-  
-
 
 export const config = {
   matcher: [
