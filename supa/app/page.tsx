@@ -1,7 +1,6 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0";
-import AuthPage from "./components/auth";
 import Chat from "./components/chat";
 
 export default function HomePage() {
