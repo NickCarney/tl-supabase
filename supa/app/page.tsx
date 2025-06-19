@@ -14,7 +14,6 @@ export default function HomePage() {
   return (
     <main className="text-center p-8">
       <h1 className="text-lg font-bold">Welcome to Devjock Test!</h1>
-      <AuthPage />
       {user && (
         <div>
           <p className="text-sm text-gray-500">User ID: {user.sub}</p>
